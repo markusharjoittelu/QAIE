@@ -46,6 +46,8 @@ def dice():
             # Grab results from the job
             result = job.result()
             counts = result.get_counts(circuit)
+            
+            # Convert into single bits
             if bit_from_counts(counts) == '11':
                 bits += '1'
             elif bit_from_counts(counts) == '00':
@@ -53,22 +55,12 @@ def dice():
             else:
                 print('Quantum inaccuracy!')
         
+        # Only accept number between 1-6
         if bits == '111' or bits == '000':
             bits = ''
         else:
             return bits
-d=dice()
-print("bitit o: ", d)
-print("noppa o: ", int(d, 2))
-print('strinkinä: ', str(int(d, 2)))
 
 if __name__ == '__main__':
     app.config['DEBUG']=True
     app.run(threaded=True, port=5000)
-'''
-# Returns counts
-counts = result.get_counts(circuit)
-print("\nTotal count for 00 and 11 are:",counts)
-
-# Draw the circuit
-circuit.draw()'''
